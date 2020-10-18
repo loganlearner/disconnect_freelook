@@ -7,27 +7,24 @@ local lastTick = CurTime()
 
 local function onDisconnected()
     isFreelooking = true
-    print( "DC AHHHHHHHHHHHHHHHHhhhh" )
 end
 
 local function onReconnected()
-    print( "RE CON AHHHHHHHHHHHHHHHHhhhh" )
     isFreelooking = false
 end
 
 dTimer.Create( "DCFL_Timer_Ping", retryTime, 0, function()
     if didTry then return end
-
     didTry = true
+
+    net.Start( "DCFL_Ping" )
+    net.SendToServer()
 
     dTimer.Create( "DCFL_Timer_Timeout", timeoutTime, 1, function()
         isConnected = false
 
         onDisconnected()
     end )
-
-    net.Start( "DCFL_Ping" )
-    net.SendToServer()
 end )
 
 net.Receive( "DCFL_Pong", function()
@@ -41,32 +38,6 @@ net.Receive( "DCFL_Pong", function()
 
     dTimer.Stop( "DCFL_Timer_Timeout" )
 end )
-
--- local function pingServer()
---     lastTick = CurTime()
--- end
-
--- hook.Add( "Tick", "DCFL_Tick", pingServer )
-
--- local function clientThink()
---     print( lastTick )
-
---     if CurTime() - lastTick < timeoutTime then
---         if isWaiting then
---             isWaiting = false
---             onReconnected()
---         end
-
---         return
---     end
-
---     if isWaiting then return end
-
---     isWaiting = true
---     onDisconnected()
--- end
-
--- hook.Add( "Think", "DCFL_ClientThink", clientThink )
 
 local function freelook( ply, pos, angles, fov )
     if not isFreelooking then return end
