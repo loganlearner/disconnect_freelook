@@ -43,11 +43,7 @@ function dTimer.Start( id )
     dTimer.timers[id].lastCall = SysTime()
 end
 
--- function dTimer.Pause( id )
---     dTimer.timers[id].isPaused = true
--- end
-
-function dTimer.Stop( id )
+function dTimer.Pause( id )
     dTimer.timers[id].isPaused = true
 end
 
