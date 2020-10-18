@@ -4,15 +4,12 @@ local isFreelooking = false
 local timeoutTime = 2 -- 2 : seconds
 local retryTime = 2 -- 2 : seconds
 local lastTick = CurTime()
-local flView = {
-    pos = Vector()
-}
+local flViewPos = Vector()
 
 local function onDisconnected()
     isFreelooking = true
 
-    flView.pos = LocalPlayer():EyePos()
-    flView.ang = LocalPlayer():EyeAngles()
+    flViewPos = LocalPlayer():EyePos()
 end
 
 local function onReconnected()
@@ -57,10 +54,10 @@ local function freelook( ply, pos, angles, fov )
     moveVec:Rotate( angles )
     moveVec = ( moveVec + Vector( 0, 0, z ) ) * speed
 
-    flView.pos = flView.pos + moveVec
+    flViewPos = flViewPos + moveVec
 
     local view = {
-        origin = flView.pos,
+        origin = flViewPos,
         angles = angles,
         fov = fov,
         drawviewer = true
