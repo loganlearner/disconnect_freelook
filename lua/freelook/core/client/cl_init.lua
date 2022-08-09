@@ -3,7 +3,6 @@ local isConnected = true
 local isFreelooking = false
 local timeoutTime = 2 -- 2 : seconds
 local retryTime = 2 -- 2 : seconds
-local lastTick = CurTime()
 local flViewPos = Vector()
 
 local function onDisconnected()
