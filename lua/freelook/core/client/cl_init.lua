@@ -46,8 +46,8 @@ local function freelook( ply, pos, angles, fov )
 
     local x = ( input.IsKeyDown( KEY_W ) and 1 or 0 ) - ( input.IsKeyDown( KEY_S ) and 1 or 0 )
     local y = ( input.IsKeyDown( KEY_A ) and 1 or 0 ) - ( input.IsKeyDown( KEY_D ) and 1 or 0 )
-    local z = ( input.IsKeyDown( KEY_SPACE ) and 1 or 0 ) - ( input.IsKeyDown( KEY_LCONTROL ) and 1 or 0 )
-    local speed = 20 * ( input.IsKeyDown( KEY_LSHIFT ) and 2 or 1 )
+    local z = ( input.IsKeyDown( KEY_SPACE ) and 1 or 0 )
+    local speed = 10 * ( input.IsKeyDown( KEY_LSHIFT ) and 2 or 1 ) * ( input.IsKeyDown( KEY_LCONTROL ) and 0.5 or 1 )
 
     local moveVec = Vector( x, y, 0 )
     moveVec:Rotate( angles )
