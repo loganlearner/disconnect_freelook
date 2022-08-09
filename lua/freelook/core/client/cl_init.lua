@@ -67,4 +67,3 @@ local function freelook( ply, pos, angles, fov )
 end
 
 hook.Add( "CalcView", "DCFL_Freelook", freelook )
-
